@@ -1,0 +1,37 @@
+# PENTEST-WORK Global .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+*.egg-info/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.log
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Evidence (large files - commit hashes only)
+*.pcap
+*.mp4
+*.avi
+
+# Sensitive (NEVER commit)
+**/authorization-letter.pdf
+**/authorization-letter-*.pdf
+
+# Archive (optional - usually kept in repo)
+# @archive/
+
+# IDE
+.vscode/
+.idea/
+*.code-workspace

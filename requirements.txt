@@ -1,0 +1,15 @@
+# Python dependencies for PENTEST-WORK automation scripts
+
+# Core
+pytz>=2024.1      # Timezone support (BRT timestamps)
+
+# Report Generation (TODO - future implementation)
+# jinja2>=3.1.0   # Template engine
+# markdown>=3.5.0 # Markdown processing
+# weasyprint>=60.0 # PDF generation
+# pandoc>=2.3     # Document conversion
+
+# Optional: Parsing tools
+# python-nmap>=0.7.1    # Nmap XML parsing
+# beautifulsoup4>=4.12.0 # HTML/XML parsing
+# lxml>=5.0.0           # XML processing
