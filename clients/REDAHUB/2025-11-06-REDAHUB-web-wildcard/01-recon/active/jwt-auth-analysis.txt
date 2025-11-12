@@ -1,0 +1,33 @@
+        Ea = Jn.toObjectSet(["age", "authorization", "content-length", "content-type", "etag", "expires", "from", "host", "if-modified-since", "if-unmodified-since", "last-modified", "location", "max-forwards", "proxy-authorization", "referer", "retry-after", "user-agent"]),
+                auth: i
+        Unauthorized: 401,
+        const t = localStorage.getItem("access_token");
+        return t && (e.headers.Authorization = "Bearer ".concat(t)), e
+            const t = localStorage.getItem("refresh_token");
+            if (!t) return localStorage.removeItem("access_token"), localStorage.removeItem("refresh_token"), localStorage.removeItem("user"), window.location.href = "/login", Promise.reject(e);
+                const e = await Ds.post("".concat("https://bkd.redahub.cloud/api", "/auth/refresh/"), {
+                return localStorage.setItem("access_token", n), localStorage.setItem("user", JSON.stringify(a)), r.headers.Authorization = "Bearer ".concat(n), Fs(r)
+                return console.error("\u274c Refresh Token Error:", n), localStorage.removeItem("access_token"), localStorage.removeItem("refresh_token"), localStorage.removeItem("user"), window.location.href = "/login", Promise.reject(n)
+                this.TOKEN_KEY = "access_token", this.REFRESH_TOKEN_KEY = "refresh_token", this.USER_KEY = "user"
+                    const t = await zs("/auth/login/", e);
+                    return await zs("/auth/register/", e)
+                    const t = await zs("/auth/refresh/", {
+                    return await zs("/auth/verify/", {
+                    await zs("/auth/reset-password/", {
+                    await zs("/auth/reset-password/".concat(e, "/"), {
+                localStorage.removeItem(this.TOKEN_KEY), localStorage.removeItem(this.REFRESH_TOKEN_KEY), localStorage.removeItem(this.USER_KEY)
+                return localStorage.getItem(this.TOKEN_KEY)
+                return localStorage.getItem(this.REFRESH_TOKEN_KEY)
+                const e = localStorage.getItem(this.USER_KEY);
+                localStorage.setItem(this.TOKEN_KEY, e), localStorage.setItem(this.REFRESH_TOKEN_KEY, t)
+                localStorage.setItem(this.TOKEN_KEY, e)
+                localStorage.setItem(this.USER_KEY, JSON.stringify(e))
+                redirectTo: n = "/auth/login"
+            return "object" === typeof a && null !== a && ((!("typ" in a) || "JWT" === (null === a || void 0 === a ? void 0 : a.typ)) && (!!a.alg && (!t || a.alg === t)))
+                                            to: "/auth/forgot-password",
+                                    to: "/auth/register",
+                                    to: "/auth/login",
+                    const e = localStorage.getItem(RR);
+                                                return t = e.id, p(t), localStorage.setItem(RR, t.toString()), void v(!1);
+                                    path: "/auth/login",
+                                    path: "/auth/register",
