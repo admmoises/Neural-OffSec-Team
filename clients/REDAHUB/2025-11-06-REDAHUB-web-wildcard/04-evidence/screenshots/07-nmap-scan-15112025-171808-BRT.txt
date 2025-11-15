@@ -1,0 +1,87 @@
+Starting Nmap 7.98 ( https://nmap.org ) at 2025-11-15 17:18 -0300
+Nmap scan report for redahub.cloud (82.29.59.28)
+Host is up (0.12s latency).
+rDNS record for 82.29.59.28: srv1065673.hstgr.cloud
+
+PORT     STATE  SERVICE    VERSION
+80/tcp   open   http       Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+443/tcp  open   ssl/http   Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+3000/tcp open   ppp?
+8080/tcp closed http-proxy
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3000-TCP:V=7.98%I=7%D=11/15%Time=6918E00E%P=arm-apple-darwin25.0.0%
+SF:r(GetRequest,2D4,"HTTP/1\.1\x20200\x20OK\r\naccept-ranges:\x20bytes\r\n
+SF:cache-control:\x20public,\x20max-age=0\r\nlast-modified:\x20Mon,\x2006\
+SF:x20Oct\x202025\x2012:40:27\x20GMT\r\netag:\x20W/\"1cb-199b9899a78\"\r\n
+SF:content-type:\x20text/html;\x20charset=utf-8\r\ncontent-length:\x20459\
+SF:r\nDate:\x20Sat,\x2015\x20Nov\x202025\x2020:18:21\x20GMT\r\nConnection:
+SF:\x20close\r\n\r\n<!doctype\x20html>\n<html\x20lang=\"en\">\n\x20\x20<he
+SF:ad>\n\x20\x20\x20\x20<meta\x20charset=\"UTF-8\"\x20/>\n\x20\x20\x20\x20
+SF:<link\x20rel=\"icon\"\x20type=\"image/svg\+xml\"\x20href=\"/favicon\.ic
+SF:o\"\x20/>\n\x20\x20\x20\x20<meta\x20name=\"viewport\"\x20content=\"widt
+SF:h=device-width,\x20initial-scale=1\.0\"\x20/>\n\x20\x20\x20\x20<title>E
+SF:asypanel</title>\n\x20\x20\x20\x20<script\x20type=\"module\"\x20crossor
+SF:igin\x20src=\"/assets/index-Cvw0WVkJ\.js\"></script>\n\x20\x20\x20\x20<
+SF:link\x20rel=\"stylesheet\"\x20crossorigin\x20href=\"/assets/index-BUEH_
+SF:YWd\.css\">\n\x20\x20</head>\n\x20\x20<body>\n\x20\x20\x20\x20<div\x20i
+SF:d=\"root\"></div>\n\x20\x20</body>\n</html>\n")%r(Help,91,"HTTP/1\.1\x2
+SF:0400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nContent-Type:\x20app
+SF:lication/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Client
+SF:\x20Error\",\"statusCode\":400}")%r(NCP,91,"HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\nContent-Length:\x2065\r\nContent-Type:\x20application/json\r
+SF:\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Client\x20Error\",\"s
+SF:tatusCode\":400}")%r(HTTPOptions,E1,"HTTP/1\.1\x20404\x20Not\x20Found\r
+SF:\ncontent-type:\x20application/json;\x20charset=utf-8\r\ncontent-length
+SF::\x2076\r\nDate:\x20Sat,\x2015\x20Nov\x202025\x2020:18:22\x20GMT\r\nCon
+SF:nection:\x20close\r\n\r\n{\"message\":\"Route\x20OPTIONS:/\x20not\x20fo
+SF:und\",\"error\":\"Not\x20Found\",\"statusCode\":404}")%r(RTSPRequest,E1
+SF:,"HTTP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x20application/json
+SF:;\x20charset=utf-8\r\ncontent-length:\x2076\r\nDate:\x20Sat,\x2015\x20N
+SF:ov\x202025\x2020:18:22\x20GMT\r\nConnection:\x20close\r\n\r\n{\"message
+SF:\":\"Route\x20OPTIONS:/\x20not\x20found\",\"error\":\"Not\x20Found\",\"
+SF:statusCode\":404}");
+
+Nmap scan report for bkd.redahub.cloud (82.29.59.28)
+Host is up (0.10s latency).
+rDNS record for 82.29.59.28: srv1065673.hstgr.cloud
+
+PORT     STATE  SERVICE    VERSION
+80/tcp   open   http       Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+443/tcp  open   ssl/http   Golang net/http server (Go-IPFS json-rpc or InfluxDB API)
+3000/tcp open   ppp?
+8080/tcp closed http-proxy
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port3000-TCP:V=7.98%I=7%D=11/15%Time=6918E00E%P=arm-apple-darwin25.0.0%
+SF:r(GetRequest,2D4,"HTTP/1\.1\x20200\x20OK\r\naccept-ranges:\x20bytes\r\n
+SF:cache-control:\x20public,\x20max-age=0\r\nlast-modified:\x20Mon,\x2006\
+SF:x20Oct\x202025\x2012:40:27\x20GMT\r\netag:\x20W/\"1cb-199b9899a78\"\r\n
+SF:content-type:\x20text/html;\x20charset=utf-8\r\ncontent-length:\x20459\
+SF:r\nDate:\x20Sat,\x2015\x20Nov\x202025\x2020:18:21\x20GMT\r\nConnection:
+SF:\x20close\r\n\r\n<!doctype\x20html>\n<html\x20lang=\"en\">\n\x20\x20<he
+SF:ad>\n\x20\x20\x20\x20<meta\x20charset=\"UTF-8\"\x20/>\n\x20\x20\x20\x20
+SF:<link\x20rel=\"icon\"\x20type=\"image/svg\+xml\"\x20href=\"/favicon\.ic
+SF:o\"\x20/>\n\x20\x20\x20\x20<meta\x20name=\"viewport\"\x20content=\"widt
+SF:h=device-width,\x20initial-scale=1\.0\"\x20/>\n\x20\x20\x20\x20<title>E
+SF:asypanel</title>\n\x20\x20\x20\x20<script\x20type=\"module\"\x20crossor
+SF:igin\x20src=\"/assets/index-Cvw0WVkJ\.js\"></script>\n\x20\x20\x20\x20<
+SF:link\x20rel=\"stylesheet\"\x20crossorigin\x20href=\"/assets/index-BUEH_
+SF:YWd\.css\">\n\x20\x20</head>\n\x20\x20<body>\n\x20\x20\x20\x20<div\x20i
+SF:d=\"root\"></div>\n\x20\x20</body>\n</html>\n")%r(Help,91,"HTTP/1\.1\x2
+SF:0400\x20Bad\x20Request\r\nContent-Length:\x2065\r\nContent-Type:\x20app
+SF:lication/json\r\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Client
+SF:\x20Error\",\"statusCode\":400}")%r(NCP,91,"HTTP/1\.1\x20400\x20Bad\x20
+SF:Request\r\nContent-Length:\x2065\r\nContent-Type:\x20application/json\r
+SF:\n\r\n{\"error\":\"Bad\x20Request\",\"message\":\"Client\x20Error\",\"s
+SF:tatusCode\":400}")%r(HTTPOptions,E1,"HTTP/1\.1\x20404\x20Not\x20Found\r
+SF:\ncontent-type:\x20application/json;\x20charset=utf-8\r\ncontent-length
+SF::\x2076\r\nDate:\x20Sat,\x2015\x20Nov\x202025\x2020:18:22\x20GMT\r\nCon
+SF:nection:\x20close\r\n\r\n{\"message\":\"Route\x20OPTIONS:/\x20not\x20fo
+SF:und\",\"error\":\"Not\x20Found\",\"statusCode\":404}")%r(RTSPRequest,E1
+SF:,"HTTP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x20application/json
+SF:;\x20charset=utf-8\r\ncontent-length:\x2076\r\nDate:\x20Sat,\x2015\x20N
+SF:ov\x202025\x2020:18:22\x20GMT\r\nConnection:\x20close\r\n\r\n{\"message
+SF:\":\"Route\x20OPTIONS:/\x20not\x20found\",\"error\":\"Not\x20Found\",\"
+SF:statusCode\":404}");
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 2 IP addresses (2 hosts up) scanned in 17.22 seconds

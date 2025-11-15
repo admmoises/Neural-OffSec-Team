@@ -1,0 +1,57 @@
+=== 403 BYPASS TESTING - 15-11-2025 17:17:51 BRT ===
+
+[TEST] .env
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+HTTP: 404
+
+[TEST] .git/config
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+HTTP: 404
+
+[TEST] docker-compose.yml
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+HTTP: 404
+
+[TEST] settings.py
+
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Not Found</title>
+</head>
+<body>
+  <h1>Not Found</h1><p>The requested resource was not found on this server.</p>
+</body>
+</html>
+
+HTTP: 404

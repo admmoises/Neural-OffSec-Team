@@ -1,0 +1,69 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* Host bkd.redahub.cloud:443 was resolved.
+* IPv6: (none)
+* IPv4: 82.29.59.28
+*   Trying 82.29.59.28:443...
+* Connected to bkd.redahub.cloud (82.29.59.28) port 443
+* ALPN: curl offers h2,http/1.1
+* (304) (OUT), TLS handshake, Client hello (1):
+} [322 bytes data]
+*  CAfile: /etc/ssl/cert.pem
+*  CApath: none
+* (304) (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* (304) (IN), TLS handshake, Unknown (8):
+{ [15 bytes data]
+* (304) (IN), TLS handshake, Certificate (11):
+{ [2845 bytes data]
+* (304) (IN), TLS handshake, CERT verify (15):
+{ [520 bytes data]
+* (304) (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* (304) (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / AEAD-CHACHA20-POLY1305-SHA256 / [blank] / UNDEF
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=bkd.redahub.cloud
+*  start date: Oct 21 16:21:01 2025 GMT
+*  expire date: Jan 19 16:21:00 2026 GMT
+*  subjectAltName: host "bkd.redahub.cloud" matched cert's "bkd.redahub.cloud"
+*  issuer: C=US; O=Let's Encrypt; CN=R12
+*  SSL certificate verify ok.
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://bkd.redahub.cloud/api/auth/register/
+* [HTTP/2] [1] [:method: POST]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: bkd.redahub.cloud]
+* [HTTP/2] [1] [:path: /api/auth/register/]
+* [HTTP/2] [1] [user-agent: curl/8.7.1]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [content-length: 70]
+> POST /api/auth/register/ HTTP/2
+> Host: bkd.redahub.cloud
+> User-Agent: curl/8.7.1
+> Accept: */*
+> Content-Type: application/json
+> Content-Length: 70
+> 
+} [70 bytes data]
+* upload completely sent off: 70 bytes
+< HTTP/2 400 
+< allow: POST, OPTIONS
+< content-type: application/json
+< cross-origin-opener-policy: same-origin
+< date: Sat, 15 Nov 2025 20:17:52 GMT
+< referrer-policy: same-origin
+< server: gunicorn
+< vary: Accept, Cookie, origin
+< x-content-type-options: nosniff
+< x-frame-options: DENY
+< content-length: 76
+< 
+{ [76 bytes data]
+100   146  100    76  100    70    619    570 --:--:-- --:--:-- --:--:--  1196
+* Connection #0 to host bkd.redahub.cloud left intact
+{"detail":"JSON parse error - Invalid \\escape: line 1 column 49 (char 48)"}

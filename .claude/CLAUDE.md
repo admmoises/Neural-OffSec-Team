@@ -8,6 +8,77 @@
 - 🔧 MCP Security Toolkit: 25+ ferramentas
 - 🕐 Timezone: America/Sao_Paulo (BRT/BRST)
 
+## 🚀 FERRAMENTAS E CAPACIDADES PODEROSAS (LEMBRAR SEMPRE)
+
+### MCP Security Toolkit (67% funcional):
+**Funcionando:**
+- ✅ `gobuster_scan` → Content discovery com wordlists massivos
+- ✅ `john_crack_hash` → Password cracking (MD5, SHA, bcrypt, NTLM)
+- ✅ `hydra_bruteforce` → Bruteforce de serviços (SSH, FTP, HTTP, SMB)
+- ✅ `metasploit_search` → Busca de exploits e módulos
+- ✅ `nmap_scan` → Port scanning e OS detection
+- ✅ `sublist3r_enum` → Subdomain enumeration multi-source
+- ✅ `check_installed_tools` → Verificar status de ferramentas
+
+**Com Problemas (corrigir se necessário):**
+- ⚠️ `sqlmap_test`, `nikto_scan` (podem precisar de fix)
+
+### Capacidades Nativas Claude (SEMPRE USAR):
+1. **Paralelização Massiva** 🔥
+   - `concurrent.futures` com `ThreadPoolExecutor`
+   - 30-50 threads simultâneos
+   - Exemplo: 200+ API paths em 30 segundos
+
+2. **WebSearch Batch** 🌐
+   - 15+ queries simultâneas
+   - OSINT batch inteligente
+   - Exemplo: LinkedIn + GitHub + Breaches em paralelo
+
+3. **Task Agents Paralelos** 🤖
+   - Delegação para sub-agents especializados
+   - Exemplo: `Task(subagent_type="Explore")` para codebase analysis
+   - Múltiplos agents executando simultaneamente
+
+4. **Bundle Reverse Engineering** 📦
+   - jsbeautifier para bundles JS
+   - grep patterns para API endpoints
+   - Exemplo: 5.4MB Easypanel bundle → endpoints mapeados
+
+5. **Custom Python Scripts** 🐍
+   - Professional exploit templates
+   - CSRF handling automático
+   - Rate limit detection
+   - Progress tracking + auto-save
+   - Retry logic + error handling
+
+6. **Chrome MCP** 🌐
+   - `mcp__chrome__*` tools para browser automation
+   - Execute JavaScript, get page content
+   - Testar SPAs e interceptar network requests
+
+7. **Context7 MCP** 📚
+   - `mcp__context7__*` para documentação oficial
+   - Resolve library IDs e get docs atualizadas
+
+### Skills Poderosas Disponíveis:
+- `superpowers:brainstorming` → Planejamento colaborativo Socratic
+- `superpowers:systematic-debugging` → Root cause analysis framework
+- `superpowers:verification-before-completion` → Validação antes de claims
+- `superpowers:test-driven-development` → TDD workflow
+- `tailwindcss` → UI styling se necessário
+- `example-skills:webapp-testing` → Playwright para frontend testing
+
+### Ferramentas MCP Recomendadas (Criar se Necessário):
+1. **burpsuite-scanner**: Scan automatizado vulnerabilidades web
+2. **zap-scanner**: OWASP ZAP para XSS/CSRF/SQLi
+3. **ffuf**: Web fuzzer (mais rápido que gobuster)
+4. **nuclei**: Template-based scanning
+5. **amass**: Subdomain enum avançado
+6. **katana**: Web crawler para endpoints
+7. **httpx**: HTTP toolkit + tech detection
+
+---
+
 ## MCP Tools Quick Reference
 
 **Recon:** dns_lookup, nmap_scan, sublist3r_enum, theharvester_osint
@@ -114,7 +185,7 @@ Exemplo: `FINDING-001-sql-injection-login.md`
 - DELETE scripts de teste após execução (a menos que seja PoC funcional)
 - DELETE outputs brutos de scanners após parsing
 - DELETE arquivos .tmp, .log, .bak ao final de cada dia
-- MOVER engagamentos concluídos para `@archive/` após 30 dias
+- MOVER engagements concluídos para `@archive/` após 30 dias
 - ALERTAR quando `/evidence/screenshots/` > 500 arquivos
 - ALERTAR quando workspace total > 5GB
 
@@ -431,75 +502,6 @@ Após cada sessão, Claude DEVE perguntar a si mesmo:
 - [ ] Documentei TUDO com evidências?
 
 **Score Esperado:** 8/10 ou superior = Red Team Elite
-
----
-
-## 🎯 Exemplos de Pensamento Elite vs Básico
-
-### ❌ Pensamento Básico:
-```
-1. Descobri Django Admin na porta 443
-2. Vou fazer bruteforce com rockyou.txt
-3. [3 horas depois] Nenhuma senha encontrada
-4. Fim
-```
-
-### ✅ Pensamento Elite:
-```
-1. Descobri Django Admin na porta 443
-2. ANTES de bruteforce:
-   a. Timing attack (10 samples) → 2 emails válidos
-   b. Check registration endpoint → permite criar users?
-   c. Password reset → enumeration possível?
-   d. Download frontend bundle → admin routes ocultas?
-   e. Check CSRF validation → bypassable?
-3. Bruteforce FOCADO nos 2 emails válidos (não todos)
-4. Se falhar: procurar outros vetores (SSRF, XXE, etc)
-5. Documentar TODAS as tentativas (não só sucessos)
-```
-
-### ❌ Pensamento Básico:
-```
-1. Encontrei Easypanel na porta 3000
-2. Vou testar credenciais default
-3. Não funcionou, próximo alvo
-```
-
-### ✅ Pensamento Elite:
-```
-1. Encontrei Easypanel na porta 3000 (CVSS 9.1!)
-2. IMEDIATAMENTE baixar bundle JS (5.2MB)
-3. Reverse engineer:
-   a. Procurar setup flow → permite criar admin?
-   b. Procurar tRPC endpoints → listar TODOS
-   c. Procurar credenciais hardcoded
-   d. Procurar debug flags
-4. Testar setup.getStatus → já configurado?
-5. Se não: tentar criar conta admin
-6. Se sim: bruteforce + tRPC endpoint testing
-7. Este é o alvo #1, não desistir facilmente!
-```
-
----
-
-## 🔬 Pesquisa Proativa (Quando Travar)
-
-Se Claude ficar preso ou sem saber o que fazer:
-
-### Estratégia de Desbloqueio:
-1. **Re-priorizar:** Estou atacando o alvo de maior prioridade?
-2. **Pesquisar:** WebSearch por "exploit [technology] [version]"
-3. **Documentação:** Ler docs oficiais da tecnologia (WebFetch)
-4. **Source code:** GitHub search por issues conhecidas
-5. **Comunidade:** Procurar write-ups de CTFs similares
-6. **Criatividade:** "O que um atacante REAL faria aqui?"
-
-### Perguntas Para Si Mesmo:
-- Explorei TODAS as funcionalidades descobertas?
-- Há algum bundle JS que não baixei?
-- Há algum endpoint que não testei?
-- Há alguma técnica de bypass que não tentei?
-- Estou pensando como atacante ou como scanner?
 
 ---
 
