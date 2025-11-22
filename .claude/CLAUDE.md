@@ -519,3 +519,392 @@ Após cada sessão, Claude DEVE perguntar a si mesmo:
 ---
 
 **ESTA SEÇÃO É A ESSÊNCIA DO RED TEAM ELITE. SEGUIR SEMPRE.**
+
+---
+
+# 🤖 NECROBYTE - Agente OffSec Multimodal
+
+## Visão Geral
+
+**NecroByte** é um dashboard C2 (Command & Control) profissional para operações de pentesting e OSINT, com integração completa ao Google Gemini AI. Localizado em `/NecroByte/`.
+
+### Stack Tecnológica
+
+```
+Frontend:  React 19.2.0 + TypeScript + Vite 6.2.0
+Styling:   TailwindCSS (inline CDN)
+AI Engine: Google Gemini AI SDK v1.30.0
+Icons:     Lucide React v0.554.0
+Audio:     Web Audio API (Live Voice)
+Deploy:    AI Studio + Standalone (npm run dev)
+```
+
+### Arquitetura de Componentes
+
+```
+NecroByte/
+├── App.tsx                    # Shell principal + navegação
+├── pages/
+│   ├── Dashboard.tsx          # Gestão de alvos OSINT
+│   └── Intelligence.tsx       # Chat multimodal Gemini
+├── components/
+│   ├── GlitchHeader.tsx       # Header estilizado
+│   └── TerminalLog.tsx        # Logs real-time
+├── services/
+│   └── geminiService.ts       # Integração Gemini (8 modos)
+├── types.ts                   # TypeScript interfaces
+├── index.html                 # Template + Tailwind config
+└── vite.config.ts             # Build config
+```
+
+---
+
+## 🎯 Funcionalidades Implementadas
+
+### 1. Dashboard OSINT (Dashboard.tsx)
+
+**Capacidades:**
+- ✅ **Gestão de Alvos:** Adicionar domínios para análise
+- ✅ **OSINT Automático:** Análise via Gemini Search Grounding
+- ✅ **Status Tracking:** pending → analyzing → analyzed/error
+- ✅ **Relatórios Técnicos:** Markdown formatado com fontes
+- ✅ **Logs Real-Time:** Categoria SYSTEM/USER/AI/NETWORK
+
+**Exemplo de Uso:**
+```typescript
+// Adiciona alvo → Executa analyzeTargetOSINT(domain)
+// Gemini retorna: Tech stack, bug bounty, incidentes, superfície de ataque
+// Relatório exibido em modal com fontes consultadas
+```
+
+**Serviço Gemini:**
+```typescript
+analyzeTargetOSINT(domain: string) {
+  model: 'gemini-2.5-flash',
+  tools: [{ googleSearch: {} }], // Search Grounding
+  prompt: "Reconhecimento OSINT completo"
+}
+```
+
+---
+
+### 2. Intelligence - IA Tática (Intelligence.tsx)
+
+**8 Modos de Agente Disponíveis:**
+
+| Modo | Model | Descrição | Use Case |
+|------|-------|-----------|----------|
+| **CHAT_PRO** | gemini-3-pro-preview | Chat profissional | Análise técnica detalhada |
+| **THINKING** | gemini-3-pro + 32k budget | Análise profunda | Reasoning complexo |
+| **FAST** | gemini-flash-lite-latest | Consulta rápida | Queries simples |
+| **SEARCH** | gemini-2.5-flash + grounding | Pesquisa web | OSINT em tempo real |
+| **IMAGE_GEN** | imagen-4.0-generate-001 | Gerar imagem | Diagramas, mockups |
+| **IMAGE_EDIT** | gemini-2.5-flash-image | Editar imagem | Manipulação visual |
+| **VIDEO_GEN** | veo-3.1-fast-generate-preview | Gerar vídeo | 720p/16:9/5s polling |
+| **AUDIO_TRANSCRIPTION** | gemini-2.5-flash | Transcrição | Análise de áudio |
+| **LIVE** | gemini-2.5-flash-native-audio | Voz tempo real | Live API bidirectional |
+
+**Funcionalidades:**
+- ✅ Upload de imagens/áudio (drag & drop)
+- ✅ Chat history com timestamp
+- ✅ Multimodal responses (text/image/video)
+- ✅ Live Voice API com WebAudio
+- ✅ System instruction customizado: "Necrobyte assistant profissional"
+
+---
+
+## 🔧 Integrações Gemini Avançadas
+
+### Search Grounding (OSINT Real-Time)
+```typescript
+// Retorna groundingMetadata com chunks
+const chunks = response.candidates?.[0]?.groundingMetadata?.groundingChunks;
+// Fontes: URLs + títulos das páginas consultadas
+```
+
+### Live Voice API (Tempo Real)
+```typescript
+class LiveSession {
+  - Input: AudioContext 16kHz (microfone)
+  - Output: AudioContext 24kHz (playback)
+  - Encoding: PCM → Base64
+  - Voice: "Kore" (prebuilt)
+  - Bidirectional: User speech → AI response (audio + text)
+}
+```
+
+### Video Generation Polling
+```typescript
+// Polling até operation.done
+while (!operation.done) {
+  await new Promise(resolve => setTimeout(resolve, 5000));
+  operation = await ai.operations.getVideosOperation({operation});
+}
+// Retorna: operation.response.generatedVideos[0].video.uri
+```
+
+---
+
+## 🎨 Design System (Cyber-Offensive Aesthetic)
+
+### Color Palette (index.html)
+```javascript
+necro: {
+  red: '#CC0000',      // Primary accent
+  dark: '#0A0E27',     // Background dark
+  black: '#050505',    // Deep black
+  gray: '#1A1F3A',     // Panels
+  metal: '#2A2F4A',    // Borders
+  white: '#E8EAFF',    // Text
+  neon: '#FF3333',     // Highlights
+  blood: '#660000'     // Danger
+}
+```
+
+### Custom Components
+```css
+.glass-panel {
+  background: rgba(26, 31, 58, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar-thumb:hover { background: #CC0000; }
+
+/* Animations */
+@keyframes float { /* breathing effect */ }
+@keyframes pulse-slow { /* 3s pulse */ }
+```
+
+### Typography
+- **Mono:** Roboto Mono / IBM Plex Mono
+- **Sans:** Inter (headings)
+- **Terminal:** Font-mono com tracking-wider
+
+---
+
+## 📊 Tipos TypeScript (types.ts)
+
+```typescript
+interface Target {
+  id: string;
+  domain: string;
+  addedAt: string;
+  notes?: string;           // OSINT report
+  lastAnalysis?: string;
+  status: 'pending' | 'analyzing' | 'analyzed' | 'error';
+}
+
+interface ChatMessage {
+  role: 'user' | 'model';
+  content: string;
+  timestamp: Date;
+  isThinking?: boolean;
+  type?: 'text' | 'image' | 'video' | 'audio';
+  mediaUrl?: string;
+  metadata?: any;
+}
+
+enum AgentMode {
+  CHAT_PRO, THINKING, FAST, IMAGE_GEN,
+  IMAGE_EDIT, VIDEO_GEN, AUDIO_TRANSCRIPTION,
+  SEARCH, LIVE
+}
+```
+
+---
+
+## 🚀 Execução e Deploy
+
+### Local Development
+```bash
+cd /Users/th3_w6rst/Neural-OffSec-Team/NecroByte
+npm install
+# Configurar GEMINI_API_KEY em .env.local
+npm run dev
+```
+
+### Build para Produção
+```bash
+npm run build
+npm run preview
+```
+
+### AI Studio Deploy
+- URL: https://ai.studio/apps/drive/13Iyxke_y61ogFfYfKlMYntkPg-ml0ITT
+- Auto-deploy via AI Studio interface
+- Importmap CDN: react@19.2.0, @google/genai@1.30.0
+
+---
+
+## ⚠️ Limitações Conhecidas
+
+**Implementado:**
+- ✅ Dashboard OSINT funcional
+- ✅ Intelligence chat multimodal
+- ✅ Live Voice API
+- ✅ 8 modos Gemini
+- ✅ Upload de mídia
+
+**Não Implementado (Views vazias):**
+- ⚠️ Terminal view (placeholder)
+- ⚠️ Settings view (não implementada)
+
+**Melhorias Necessárias:**
+- ❌ Persistência de dados (localStorage/DB)
+- ❌ Histórico de chat persistente
+- ❌ Autenticação multi-user
+- ❌ Rate limiting client-side
+- ❌ API key management (hardcoded process.env)
+- ❌ Error boundary global
+- ❌ Retry logic para Live API
+- ❌ Mobile UX (básico implementado)
+
+---
+
+## 🔥 Roadmap de Desenvolvimento
+
+### Prioridade ALTA:
+1. **Persistência de Dados**
+   - LocalStorage para targets + chat history
+   - IndexedDB para binários (images/audio)
+   - Export/Import JSON
+
+2. **Terminal Interface**
+   - Emulador de terminal fake
+   - Command parser para MCP tools
+   - Output streaming (xterm.js?)
+
+3. **Settings & Config**
+   - Gemini API key management
+   - Model selection preferences
+   - Theme customization (dark/darker)
+   - Export logs/reports
+
+### Prioridade MÉDIA:
+4. **Exploit Library Integration**
+   - Database de exploits categorizados
+   - PoC code snippets
+   - CVSS calculator
+
+5. **Network Mapper**
+   - Visualização de alvos (D3.js/Cytoscape)
+   - Relações entre domínios
+   - Attack surface map
+
+6. **Report Generator**
+   - Markdown → PDF/HTML
+   - Templates profissionais
+   - Logo + branding customizável
+
+### Prioridade BAIXA:
+7. **Multi-user Workspace**
+   - Firebase/Supabase backend
+   - Real-time collaboration
+   - Role-based access
+
+8. **Plugin System**
+   - Custom agent modes
+   - External tool integrations
+   - MCP server connector
+
+---
+
+## 💡 Integração com Neural-OffSec-Team
+
+### Como o NecroByte se Encaixa:
+
+1. **OSINT Phase:**
+   - Dashboard OSINT → Análise inicial de alvos
+   - Search Grounding → Intel em tempo real
+   - Exportar relatórios para `/clients/[ENGAGEMENT]/01-reconnaissance/`
+
+2. **Exploitation Phase:**
+   - Intelligence chat → Brainstorming de vetores
+   - Thinking mode → Análise profunda de vulnerabilidades
+   - Image Gen → Diagramas de exploit chains
+
+3. **Reporting Phase:**
+   - Markdown reports → Integração com relatórios existentes
+   - Screenshots → Evidence collection
+   - Timeline logs → Chain of custody
+
+### Fluxo Recomendado:
+```
+1. Dashboard: Adicionar alvo → Rodar OSINT
+2. Intelligence: Analisar resultados com THINKING mode
+3. Terminal (futuro): Executar MCP tools via chat
+4. Export: Relatório → /clients/[NAME]/
+```
+
+---
+
+## 📝 Comandos Úteis (Development)
+
+```bash
+# Iniciar dev server
+npm run dev
+
+# Build otimizado
+npm run build
+
+# Preview build
+npm run preview
+
+# Type check
+npx tsc --noEmit
+
+# Lint (se configurado)
+# npm run lint
+
+# Adicionar dependências
+npm install [package]
+
+# Limpar node_modules
+rm -rf node_modules && npm install
+```
+
+---
+
+## 🎯 Próximos Passos Imediatos
+
+1. **Implementar Terminal View:**
+   - Criar `/pages/Terminal.tsx`
+   - Parser de comandos básico
+   - Output mock para testes
+
+2. **LocalStorage Persistence:**
+   - `useLocalStorage` hook
+   - Auto-save targets + chat
+   - Clear data button
+
+3. **Settings Panel:**
+   - `/pages/Settings.tsx`
+   - API key input (masked)
+   - Model preferences
+   - Dark/Light toggle (se necessário)
+
+4. **Error Handling:**
+   - Global ErrorBoundary
+   - Toast notifications (react-hot-toast?)
+   - Retry logic para Live API
+
+5. **Mobile Optimization:**
+   - Testar em viewport <768px
+   - Menu hamburger melhorado
+   - Touch gestures
+
+---
+
+**O NecroByte é a interface visual/UX do Neural-OffSec-Team. Use para:**
+- ✅ Análise OSINT automatizada
+- ✅ Brainstorming de vetores
+- ✅ Geração de relatórios técnicos
+- ✅ Consultas rápidas durante pentests
+- ✅ Transcrição de evidências em áudio
+
+**Evite usar para:**
+- ❌ Execução direta de exploits (use MCP tools)
+- ❌ Scans de rede (delegue ao backend)
+- ❌ Armazenamento sensível (sem encryption)
