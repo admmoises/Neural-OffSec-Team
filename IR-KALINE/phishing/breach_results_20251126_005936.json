@@ -1,0 +1,107 @@
+{
+  "timestamp": "2025-11-26T00:59:30.088757",
+  "target": {
+    "nome": "KALINE CHAVES PEREIRA",
+    "cpf": "09126926180",
+    "cpf_formatted": "091.269.261-80",
+    "email": "chavespereirakaline@gmail.com",
+    "telefone": "+5563992237479",
+    "telefone_local": "63992237479",
+    "cidade": "Araguaina",
+    "estado": "TO"
+  },
+  "findings": [
+    {
+      "source": "databreach.com/sus-brazil-2024",
+      "status": "MANUAL_SEARCH_REQUIRED",
+      "search_terms": [
+        "09126926180",
+        "KALINE CHAVES PEREIRA",
+        "63992237479"
+      ],
+      "expected_data": [
+        "CPF",
+        "Nome",
+        "Endereço",
+        "Cartão SUS",
+        "Telefone"
+      ]
+    },
+    {
+      "source": "snusbase.com",
+      "status": "REQUIRES_API_KEY",
+      "search_terms": [
+        "chavespereirakaline@gmail.com",
+        "kaline.chaves.14"
+      ],
+      "pricing": "$2.99/day ou $9.99/month"
+    },
+    {
+      "source": "leakcheck.io",
+      "status": "REQUIRES_ACCOUNT",
+      "search_terms": [
+        "chavespereirakaline@gmail.com"
+      ],
+      "pricing": "$2.99/day"
+    },
+    {
+      "source": "intelx.io",
+      "status": "PARTIAL_FREE_SEARCH",
+      "search_terms": [
+        "chavespereirakaline@gmail.com",
+        "09126926180",
+        "+5563992237479"
+      ],
+      "expected_data": [
+        "Pastes",
+        "Documents",
+        "Deep web"
+      ]
+    },
+    {
+      "source": "haveibeenpwned.com",
+      "status": "NOT_FOUND"
+    },
+    {
+      "source": "dehashed.com",
+      "status": "REQUIRES_SUBSCRIPTION",
+      "search_terms": [
+        "chavespereirakaline@gmail.com",
+        "KALINE CHAVES PEREIRA"
+      ],
+      "pricing": "$5.99/month"
+    },
+    {
+      "source": "google_dork",
+      "dork": "\"chavespereirakaline@gmail.com\""
+    },
+    {
+      "source": "google_dork",
+      "dork": "\"091.269.261-80\" OR \"09126926180\""
+    },
+    {
+      "source": "google_dork",
+      "dork": "\"63992237479\" OR \"+5563992237479\""
+    },
+    {
+      "source": "google_dork",
+      "dork": "\"KALINE CHAVES PEREIRA\""
+    },
+    {
+      "source": "google_dork",
+      "dork": "site:facebook.com \"kaline chaves\""
+    },
+    {
+      "source": "google_dork",
+      "dork": "site:olx.com.br \"kaline\" araguaina"
+    },
+    {
+      "source": "google_dork",
+      "dork": "intext:\"chavespereirakaline@gmail.com\" filetype:txt"
+    },
+    {
+      "source": "google_dork",
+      "dork": "intext:\"09126926180\" filetype:sql OR filetype:csv"
+    }
+  ]
+}

